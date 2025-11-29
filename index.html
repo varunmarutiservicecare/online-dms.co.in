@@ -1,356 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MAHA DMS Portal</title>
-<style>
-:root {
-  --accent:#0b6d91;
-  --accent-2:#ff6b6b;
-  --muted:#6b7280;
-  --glass:rgba(255,255,255,0.85);
-}
-body{
-  margin:0;
-  font-family:Inter,Arial,sans-serif;
-  background:url('hat.jpg') center/cover no-repeat,linear-gradient(135deg,rgba(3,37,65,0.9),rgba(7,17,34,0.95));
-  display:flex;justify-content:center;align-items:center;height:100vh;color:#06202b;
-}
-.card{
-  background:var(--glass);backdrop-filter:blur(6px);border-radius:14px;padding:20px;
-  box-shadow:0 10px 30px rgba(2,6,23,0.55);transition:all 0.3s ease;
-  text-align:center;
-}
-.hidden{display:none;}
-input[type=password]{padding:12px;border-radius:10px;border:1px solid rgba(10,20,30,0.06);width:320px;background:#fff;}
-button{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600;}
-button.ghost{background:transparent;color:var(--accent);border:1px solid rgba(255,255,255,0.12);}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MAHA DMS Portal</title>
+  <style>
+    :root {
+      --accent: #0b6d91;
+      --accent-2: #ff6b6b;
+      --muted: #6b7280;
+      --glass: rgba(255, 255, 255, 0.85);
+    }
 
-/* portal specific */
-#portalCard { position: relative; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: url('hat.jpg') center/cover no-repeat, linear-gradient(135deg, rgba(3, 37, 65, 0.9), rgba(7, 17, 34, 0.95));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #06202b;
+    }
 
-/* Knowledge Tools button placed top-left */
-.ktools-btn{
-  position:absolute;
-  top:18px;
-  left:18px;
-  background:var(--accent);
-  color:#fff;
-  border:0;
-  padding:8px 14px;
-  border-radius:8px;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 6px 18px rgba(11,109,145,0.16);
-}
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(6px);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.55);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
 
-.dealers{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;}
-.dealer-btn{padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:linear-gradient(180deg,#ffffff 0%, #f6fbff 100%);cursor:pointer;min-width:220px;text-align:center;font-weight:600;transition:all 0.2s ease;}
-.dealer-btn:hover{transform:scale(1.05);background:linear-gradient(180deg,#f0f8ff 0%, #e6f2ff 100%);}
-.caution{background:linear-gradient(90deg, #fff9e6,#fffbe6);border-left:6px solid var(--accent-2);padding:12px;border-radius:10px;margin-top:12px;}
-.muted{color:var(--muted);}
-small{font-size:13px;}
-table{width:100%;border-collapse:collapse;margin-top:10px;}
-th,td{padding:8px;border-bottom:1px solid rgba(10,20,30,0.04);text-align:left;}
+    .hidden {
+      display: none;
+    }
 
-/* Corporate MAHA Logo */
-.maha-logo {
-  font-weight: 900;
-  font-size: 2.2em;
-  font-family: "Segoe UI", "Arial", sans-serif;
-  background: linear-gradient(45deg, #0b3d91, #7a8c9e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
-  display: inline-block;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  cursor: default;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.18);
-  transition: all 0.3s ease;
-}
-.maha-logo::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 3px;
-  background: #0b3d91;
-  border-radius: 2px;
-  transition: width 0.4s ease;
-}
-.maha-logo:hover::after { width: 60%; }
+    input[type=password] {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(10, 20, 30, 0.06);
+      width: 320px;
+      background: #fff;
+    }
 
-/* small responsive tweak */
-@media (max-width:760px){
-  .dealer-btn{min-width:160px;}
-  input[type=password]{width:240px;}
-  .card{padding:16px;}
-}
-</style>
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button.ghost {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* Portal specific */
+    #portalCard {
+      position: relative;
+    }
+
+    /* Knowledge Tools button placed top-left */
+    .ktools-btn {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: var(--accent);
+      color: #fff;
+      border: 0;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(11, 109, 145, 0.16);
+    }
+
+    .dealers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .dealer-btn {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, #ffffff 0%, #f6fbff 100%);
+      cursor: pointer;
+      min-width: 220px;
+      text-align: center;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .dealer-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(180deg, #f0f8ff 0%, #e6f2ff 100%);
+    }
+
+    .caution {
+      background: linear-gradient(90deg, #fff9e6, #fffbe6);
+      border-left: 6px solid var(--accent-2);
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    small {
+      font-size: 13px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 8px;
+      border-bottom: 1px solid rgba(10, 20, 30, 0.04);
+      text-align: left;
+    }
+
+    /* Corporate MAHA Logo */
+    .maha-logo {
+      font-weight: 900;
+      font-size: 2.2em;
+      font-family: "Segoe UI", "Arial", sans-serif;
+      background: linear-gradient(45deg, #0b3d91, #7a8c9e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      display: inline-block;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      cursor: default;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.18);
+      transition: all 0.3s ease;
+    }
+
+    .maha-logo::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background: #0b3d91;
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .maha-logo:hover::after {
+      width: 60%;
+    }
+
+    /* Small responsive tweak */
+    @media (max-width: 760px) {
+      .dealer-btn {
+        min-width: 160px;
+      }
+
+      input[type=password] {
+        width: 240px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
-<!-- VPN Card -->
-<div class="card" id="vpnCard">
-  <div style="display:flex;align-items:center;gap:12px;justify-content:center;">
+  <!-- VPN Card -->
+  <div class="card" id="vpnCard">
+    <div style="display: flex; align-items: center; gap: 12px; justify-content: center;">
+      <div class="maha-logo">MAHA</div>
+    </div>
+    <h2>PLEASE CONNECT CISCO VPN FOR LOGIN</h2>
+    <p class="muted small">Cisco VPN must be connected before login.</p>
+    <button id="vpnBtn">I have connected VPN — Continue</button>
+  </div>
+
+  <!-- Login Card -->
+  <div class="card hidden" id="loginCard">
     <div class="maha-logo">MAHA</div>
-  </div>
-  <h2>PLEASE CONNECT CISCO VPN FOR LOGIN</h2>
-  <p class="muted small">Cisco VPN must be connected before login.</p>
-  <button id="vpnBtn">I have connected VPN — Continue</button>
-</div>
-
-<!-- Login Card -->
-<div class="card hidden" id="loginCard">
-  <div class="maha-logo">MAHA</div>
-  <h1>MAHA's DMS Portal — Login</h1>
-  <input type="password" id="pwd" placeholder="Enter password" autocomplete="off">
-  <div style="height:10px"></div>
-  <button id="loginBtn">Login</button>
-  <p class="muted small">Password is case-sensitive</p>
-</div>
-
-<!-- Portal Card -->
-<div class="card hidden" id="portalCard">
-  <button class="ktools-btn" id="ktoolsBtn" title="Open Knowledge Tools">Knowledge Tools</button>
-
-  <div style="display:flex;align-items:center;gap:12px;justify-content:center;">
-    <div class="maha-logo">MAHA</div>
+    <h1>MAHA's DMS Portal — Login</h1>
+    <input type="password" id="pwd" placeholder="Enter password" autocomplete="off">
+    <div style="height: 10px"></div>
+    <button id="loginBtn">Login</button>
+    <p class="muted small">Password is case-sensitive</p>
   </div>
 
-  <h1>WELCOME TO MAHA'S DMS PORTAL</h1>
-  <p class="muted">Logged in at: <span id="loginTime"></span></p>
-  <p class="muted small">Session valid for <span id="remain">0:00</span></p>
+  <!-- Portal Card -->
+  <div class="card hidden" id="portalCard">
+    <button class="ktools-btn" id="ktoolsBtn" title="Open Knowledge Tools">Knowledge Tools</button>
 
-  <div class="caution">
-    <strong>Warning:</strong> Engaging in fraudulent activities will result in severe consequences. Please be aware that such actions will be met with strict penalties and legal action will be taken against those involved.
+    <div style="display: flex; align-items: center; gap: 12px; justify-content: center;">
+      <div class="maha-logo">MAHA</div>
+    </div>
+
+    <h1>WELCOME TO MAHA'S DMS PORTAL</h1>
+    <p class="muted">Logged in at: <span id="loginTime"></span></p>
+    <p class="muted small">Session valid for <span id="remain">0:00</span></p>
+
+    <div class="caution">
+      <strong>Warning:</strong> Engaging in fraudulent activities will result in severe consequences. Please be aware that such actions will be met with strict penalties and legal action will be taken against those involved.
+    </div>
+
+    <h3 style="margin-top: 18px">Dealers — click to open DMS ("Stay Alert, Stay Safe: Don't Fall Prey to Fraud!")</h3>
+    <div class="dealers" id="dealersList"></div>
+
+    <h3 style="margin-top: 18px">Download & audit log (data)</h3>
+    <p class="muted small">Each click is recorded by Maha (dealer, time, IP/UA)</p>
+    <p>Total downloads: <span id="dlCount">0</span></p>
+    <table><thead><tr><th>Time</th><th>Dealer</th><th>Device/IP</th></tr></thead><tbody id="dlTableBody"></tbody></table>
   </div>
 
-  <h3 style="margin-top:18px">Dealers — click to open DMS ("Stay Alert, Stay Safe: Don't Fall Prey to Fraud!")</h3>
-  <div class="dealers" id="dealersList"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
 
-  <h3 style="margin-top:18px">Download & audit log (data)</h3>
-  <p class="muted small">Each click is recorded by Maha (dealer, time, IP/UA)</p>
-  <p>Total downloads: <span id="dlCount">0</span></p>
-  <table><thead><tr><th>Time</th><th>Dealer</th><th>Device/IP</th></tr></thead><tbody id="dlTableBody"></tbody></table>
-</div>
+      // -------- CONFIG --------
+      const PASSWORD = 'wishmaster';
+      const SESSION_DURATION = 120; // seconds (120 = 2 minutes)
+      const DEALER_WINDOW_MS = 1000; // close dealer window after 100ms (small delay). set to 0 for immediate.
+      // ------------------------
 
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
+      const dealers = ['Adarsha Automotives', 'Gem Motors', 'Jayabheri Automotives', 'Kalyani Motors', 'Sb Motors', 'Saboo RKS', 'Sai Service', 'The Mithra Agencies', 'Varun Motors', 'Santhosh Motors'];
+      const dealerUserIds = {'Adarsha Automotives': 'abc', 'Gem Motors': 'abcd', 'Jayabheri Automotives': 'mprabhu.gtk', 'Kalyani Motors': 'abce', 'Saboo RKS': 'abcf', 'Sai Service': 'abcg', 'The Mithra Agencies': 'abch', 'Varun Motors': 'abcc', 'Santhosh Motors': 'abci'};
 
-  // -------- CONFIG --------
-  const PASSWORD='wishmaster';
-  const SESSION_DURATION=120; // seconds (120 = 2 minutes)
-  const DEALER_WINDOW_MS=1000; // close dealer window after 100ms (small delay). set to 0 for immediate.
-  // ------------------------
+      let remainingSeconds, sessionTimer;
 
-  const dealers=['Adarsha Automotives','Gem Motors','Jayabheri Automotives','Kalyani Motors','Sb Motors','Saboo RKS','Sai Service','The Mithra Agencies','Varun Motors','Santhosh Motors'];
-  const dealerUserIds={'Adarsha Automotives':'abc','Gem Motors':'abcd','Jayabheri Automotives':'mprabhu.gtk','Kalyani Motors':'abce','Saboo RKS':'abcf','Sai Service':'abcg','The Mithra Agencies':'abch','Varun Motors':'abcc','Santhosh Motors':'abci'};
+      // DOM elements
+      const vpnCard = document.getElementById('vpnCard');
+      const vpnBtn = document.getElementById('vpnBtn');
+      const loginCard = document.getElementById('loginCard');
+      const loginBtn = document.getElementById('loginBtn');
+      const portalCard = document.getElementById('portalCard');
+      const remainEl = document.getElementById('remain');
+      const loginTimeEl = document.getElementById('loginTime');
+      const dlCountEl = document.getElementById('dlCount');
+      const dlTableBody = document.getElementById('dlTableBody');
+      const dealersList = document.getElementById('dealersList');
+      const pwdInput = document.getElementById('pwd');
+      const ktoolsBtn = document.getElementById('ktoolsBtn');
 
-  let remainingSeconds,sessionTimer;
+      // VPN continue — show login and autofocus password
+      vpnBtn.addEventListener('click', () => {
+        vpnCard.classList.add('hidden');
+        loginCard.classList.remove('hidden');
+        // slight delay so UI transition completes then focus
+        setTimeout(() => {
+          try { pwdInput.focus(); } catch (e) { }
+        }, 180);
+      });
 
-  // DOM
-  const vpnCard=document.getElementById('vpnCard');
-  const vpnBtn=document.getElementById('vpnBtn');
-  const loginCard=document.getElementById('loginCard');
-  const loginBtn=document.getElementById('loginBtn');
-  const portalCard=document.getElementById('portalCard');
-  const remainEl=document.getElementById('remain');
-  const loginTimeEl=document.getElementById('loginTime');
-  const dlCountEl=document.getElementById('dlCount');
-  const dlTableBody=document.getElementById('dlTableBody');
-  const dealersList=document.getElementById('dealersList');
-  const pwdInput=document.getElementById('pwd');
-  const ktoolsBtn=document.getElementById('ktoolsBtn');
+      // Enter key on password triggers login
+      pwdInput.addEventListener('keyup', (e) => {
+        if (e.key === "Enter") {
+          loginBtn.click();
+        }
+      });
 
-  // VPN continue — show login and autofocus password
-  vpnBtn.addEventListener('click',()=>{
-    vpnCard.classList.add('hidden');
-    loginCard.classList.remove('hidden');
-    // slight delay so UI transition completes then focus
-    setTimeout(()=> {
-      try { pwdInput.focus(); } catch(e) {}
-    }, 180);
-  });
+      // Login button
+      loginBtn.addEventListener('click', async () => {
+        if (pwdInput.value === PASSWORD) {
+          loginCard.classList.add('hidden');
+          portalCard.classList.remove('hidden');
+          loginTimeEl.textContent = new Date().toLocaleString();
+          renderDealers();
+          renderDownloads();
+          startSessionCountdown(SESSION_DURATION);
+        } else {
+          alert('Incorrect password');
+          pwdInput.focus();
+        }
+      });
 
-  // Enter key on password triggers login
-  pwdInput.addEventListener('keyup',(e)=>{
-    if(e.key === "Enter"){
-       loginBtn.click();
-    }
-  });
+      // Knowledge Tools button
+      ktoolsBtn.addEventListener('click', () => {
+        window.open('knowledge.html', '_blank');
+      });
 
-  // Login button
-  loginBtn.addEventListener('click',async ()=>{
-    if(pwdInput.value === PASSWORD){
-      loginCard.classList.add('hidden');
-      portalCard.classList.remove('hidden');
-      loginTimeEl.textContent=new Date().toLocaleString();
-      renderDealers();
-      renderDownloads();
-      startSessionCountdown(SESSION_DURATION);
-    } else {
-      alert('Incorrect password');
-      pwdInput.focus();
-    }
-  });
+      // render dealers list
+      function renderDealers() {
+        dealersList.innerHTML = '';
+        dealers.forEach(d => {
+          const btn = document.createElement('div');
+          btn.className = 'dealer-btn';
+          btn.textContent = d;
+          btn.onclick = () => onDealerClick(d);
+          dealersList.appendChild(btn);
+        });
+      }
 
-  // Knowledge Tools button
-  ktoolsBtn.addEventListener('click',()=>{
-    window.open('knowledge.html','_blank');
-  });
+      function buildSId() {
+        const now = new Date();
+        const y = String(now.getFullYear()).slice(2);
+        const m = ("0" + (now.getMonth() + 1)).slice(-2);
+        const d = ("0" + now.getDate()).slice(-2);
+        const h = ("0" + now.getHours()).slice(-2);
+        const min = ("0" + now.getMinutes()).slice(-2);
+        return `${min}${h}${y}${m}${d}`;
+      }
 
-  // render dealers list
-  function renderDealers(){
-    dealersList.innerHTML='';
-    dealers.forEach(d=>{
-      const btn=document.createElement('div');
-      btn.className='dealer-btn';
-      btn.textContent=d;
-      btn.onclick=()=>onDealerClick(d);
-      dealersList.appendChild(btn);
+      function buildDmsUrl(username) {
+        const base = 'http://dmsconnect.maruti.com/forms/frmservlet?config=webstart';
+        const sep = base.includes('?') ? '&' : '?';
+        const sId = buildSId();
+        return `${base}${sep}p_user_id=${encodeURIComponent(username)}&p_pmc=1&sId=${sId}`;
+      }
+
+      // fetch public ip with timeout; if blocked -> 'unknown'
+      async function fetchPublicIp(timeoutMs = 1000) {
+        try {
+          const controller = new AbortController();
+          const id = setTimeout(() => controller.abort(), timeoutMs);
+          const res = await fetch('https://api.ipify.org?format=json', { signal: controller.signal });
+          clearTimeout(id);
+          if (!res.ok) return 'unknown';
+          const j = await res.json();
+          return j.ip || 'unknown';
+        } catch (e) { return 'unknown'; }
+      }
+
+      async function getDeviceInfo() {
+        const ip = await fetchPublicIp();
+        return { ip, ua: navigator.userAgent || 'unknown', platform: navigator.platform || 'unknown' };
+      }
+
+      async function onDealerClick(dealer) {
+        const uid = dealerUserIds[dealer] || '';
+        if (!uid) { alert('User id not configured for ' + dealer); return; }
+        const url = buildDmsUrl(uid);
+        const child = window.open(url, '_blank');
+        if (!child) { alert('Popup blocked — allow popups'); return; }
+
+        // Record immediately
+        await recordDownloadEvent(dealer);
+
+        // Wait for 2 seconds before trying to close the child window
+        setTimeout(() => {
+          try { child.close(); } catch (e) { /* Ignore errors */ }
+        }, 2000);  // 2000 ms delay (2 seconds)
+      }
+
+      // store logs to localStorage
+      async function recordDownloadEvent(dealer) {
+        const info = await getDeviceInfo();
+        const now = new Date();
+        const rec = { time: now.toLocaleString(), dealer, ip: info.ip, ua: info.ua, platform: info.platform };
+        const arr = JSON.parse(localStorage.getItem('dms_downloads_v4') || '[]');
+        arr.push(rec);
+        localStorage.setItem('dms_downloads_v4', JSON.stringify(arr));
+        renderDownloads();
+      }
+
+      // render last 5 downloads & total count
+      function renderDownloads() {
+        const arr = JSON.parse(localStorage.getItem('dms_downloads_v4') || '[]');
+        dlCountEl.textContent = arr.length;
+        dlTableBody.innerHTML = '';
+        arr.slice(-5).reverse().forEach(r => {
+          const tr = document.createElement('tr');
+          // sanitize small substring of ua to keep table tidy
+          const uaShort = (r.ua || '').substring(0, 60);
+          tr.innerHTML = `<td>${r.time}</td><td>${r.dealer}</td><td>${r.ip} / ${r.platform} / ${uaShort}...</td>`;
+          dlTableBody.appendChild(tr);
+        });
+      }
+
+      function startSessionCountdown(seconds) {
+        remainingSeconds = seconds;
+        updateRemainText();
+        sessionTimer = setInterval(() => {
+          remainingSeconds--;
+          updateRemainText();
+          if (remainingSeconds <= 0) {
+            clearInterval(sessionTimer);
+            expireSession();
+          }
+        }, 1000);
+      }
+
+      function updateRemainText() {
+        const mm = String(Math.floor(remainingSeconds / 60)).padStart(2, '0');
+        const ss = String(remainingSeconds % 60).padStart(2, '0');
+        remainEl.textContent = mm + ':' + ss;
+      }
+
+      function expireSession() {
+        try {
+          window.open('', '_self');
+          window.close();
+          portalCard.innerHTML = '<div style="padding: 40px; font-family: Inter; text-align: center; font-size: 18px;">Session expired — please re-open the portal.</div>';
+        } catch (e) {}
+      }
+
     });
-  }
-
-  function buildSId(){
-    const now=new Date();
-    const y=String(now.getFullYear()).slice(2);
-    const m=("0"+(now.getMonth()+1)).slice(-2);
-    const d=("0"+now.getDate()).slice(-2);
-    const h=("0"+now.getHours()).slice(-2);
-    const min=("0"+now.getMinutes()).slice(-2);
-    return `${min}${h}${y}${m}${d}`;
-  }
-
-  function buildDmsUrl(username){
-    const base='http://dmsconnect.maruti.com/forms/frmservlet?config=webstart';
-    const sep=base.includes('?')?'&':'?';
-    const sId=buildSId();
-    return `${base}${sep}p_user_id=${encodeURIComponent(username)}&p_pmc=1&sId=${sId}`;
-  }
-
-  // fetch public ip with timeout; if blocked -> 'unknown'
-  async function fetchPublicIp(timeoutMs=1000){
-    try{
-      const controller=new AbortController();
-      const id=setTimeout(()=>controller.abort(),timeoutMs);
-      const res=await fetch('https://api.ipify.org?format=json',{signal:controller.signal});
-      clearTimeout(id);
-      if(!res.ok) return 'unknown';
-      const j=await res.json();
-      return j.ip||'unknown';
-    } catch(e){return 'unknown';}
-  }
-
-
-  async function getDeviceInfo(){
-    const ip=await fetchPublicIp();
-    return {ip,ua:navigator.userAgent||'unknown',platform:navigator.platform||'unknown'};
-  }
-
-async function onDealerClick(dealer) {
-  const uid = dealerUserIds[dealer] || '';
-  if (!uid) {
-    alert('User id not configured for ' + dealer);
-    return;
-  }
-
-  const url = buildDmsUrl(uid);
-  const child = window.open(url, '_blank');
-
-  if (!child) {
-    alert('Popup blocked — allow popups');
-    return;
-  }
-
-  // Wait for 2 seconds and then close the opened window
-  setTimeout(() => {
-    try {
-      child.close();
-    } catch (e) {
-      // Ignore errors if the child window can't be closed
-    }
-  }, 2000);  // 2000 ms (2 seconds) delay before closing the window
-
-  // Optionally, you can record the event immediately after opening the window
-  await recordDownloadEvent(dealer);
-}
-
-  // Record immediately
-  await recordDownloadEvent(dealer);
-
-  // Wait for 2 seconds before trying to close the child window
-  setTimeout(() => {
-    try {
-      child.close();
-    } catch (e) {
-      // Ignore errors if the child window can't be closed
-    }
-  }, 2000);  // 2000 ms delay (2 seconds)
-}
-
-  // store logs to localStorage
-  async function recordDownloadEvent(dealer){
-    const info=await getDeviceInfo();
-    const now=new Date();
-    const rec={time:now.toLocaleString(),dealer,ip:info.ip,ua:info.ua,platform:info.platform};
-    const arr=JSON.parse(localStorage.getItem('dms_downloads_v4')||'[]');
-    arr.push(rec);
-    localStorage.setItem('dms_downloads_v4',JSON.stringify(arr));
-    renderDownloads();
-  }
-
-  // render last 5 downloads & total count
-  function renderDownloads(){
-    const arr=JSON.parse(localStorage.getItem('dms_downloads_v4')||'[]');
-    dlCountEl.textContent=arr.length;
-    dlTableBody.innerHTML='';
-    arr.slice(-5).reverse().forEach(r=>{
-      const tr=document.createElement('tr');
-      // sanitize small substring of ua to keep table tidy
-      const uaShort = (r.ua||'').substring(0,60);
-      tr.innerHTML=`<td>${r.time}</td><td>${r.dealer}</td><td>${r.ip} / ${r.platform} / ${uaShort}...</td>`;
-      dlTableBody.appendChild(tr);
-    });
-  }
-
-function startSessionCountdown(seconds){
-  remainingSeconds=seconds;
-  updateRemainText();
-  sessionTimer=setInterval(()=>{
-    remainingSeconds--;
-    updateRemainText();
-    if(remainingSeconds<=0){
-      clearInterval(sessionTimer);
-      expireSession();
-    }
-  },1000);
-}
-
-function updateRemainText(){
-  const mm=String(Math.floor(remainingSeconds/60)).padStart(2,'0');
-  const ss=String(remainingSeconds%60).padStart(2,'0');
-  remainEl.textContent=mm+':'+ss;
-}
-
-function expireSession(){
-  try{
-    window.open('','_self');
-    window.close();
-    portalCard.innerHTML='<div style="padding:40px;font-family:Inter;text-align:center;font-size:18px;">Session expired — please re-open the portal.</div>';
-  }catch(e){}
-}
-
-});
-</script>
+  </script>
 </body>
 </html>
-
-
-
-
-
-
