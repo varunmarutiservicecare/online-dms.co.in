@@ -147,8 +147,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   const DEALER_WINDOW_MS=100; // close dealer window after 100ms (small delay). set to 0 for immediate.
   // ------------------------
 
-  const dealers=['Adarsha Automoyives','Gem Motors','Jayabheri Automotives','Kalyani Motors','Sb Motors','Saboo RKS','Sai Service','The Mithra Agencies','Varun Motors','Santhosh Motors'];
-  const dealerUserIds={'Devils Dms':'ali.m','Gem Motors':'abcd','Jayabheri Automotives':'mprabhu.gtk','Kalyani Motors':'abce','Saboo RKS':'abcf','Sai Service':'abcg','The Mithra Agencies':'abch','Varun Motors':'abcc','Santhosh Motors':'abci'};
+  const dealers=['Adarsha Automotives','Gem Motors','Jayabheri Automotives','Kalyani Motors','Sb Motors','Saboo RKS','Sai Service','The Mithra Agencies','Varun Motors','Santhosh Motors'];
+  const dealerUserIds={'Adarsha Automotives':'abc','Gem Motors':'abcd','Jayabheri Automotives':'mprabhu.gtk','Kalyani Motors':'abce','Saboo RKS':'abcf','Sai Service':'abcg','The Mithra Agencies':'abch','Varun Motors':'abcc','Santhosh Motors':'abci'};
 
   let remainingSeconds,sessionTimer;
 
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
   // fetch public ip with timeout; if blocked -> 'unknown'
-  async function fetchPublicIp(timeoutMs=4000){
+  async function fetchPublicIp(timeoutMs=15000){
     try{
       const controller=new AbortController();
       const id=setTimeout(()=>controller.abort(),timeoutMs);
@@ -298,7 +298,7 @@ function startSessionCountdown(seconds){
       clearInterval(sessionTimer);
       expireSession();
     }
-  },1000);
+  },3000);
 }
 
 function updateRemainText(){
@@ -319,3 +319,4 @@ function expireSession(){
 </script>
 </body>
 </html>
+
