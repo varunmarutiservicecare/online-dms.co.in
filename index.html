@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
   // fetch public ip with timeout; if blocked -> 'unknown'
-  async function fetchPublicIp(timeoutMs=15000){
+  async function fetchPublicIp(timeoutMs=5000){
     try{
       const controller=new AbortController();
       const id=setTimeout(()=>controller.abort(),timeoutMs);
@@ -260,7 +260,18 @@ document.addEventListener('DOMContentLoaded',()=>{
     // record immediately
     await recordDownloadEvent(dealer);
     // try to close the child after a small ms delay (DEALER_WINDOW_MS)
-    setTimeout(()=>{ try{ child.close(); } catch(e) { /* ignore */ } }, DEALER_WINDOW_MS);
+    
+    setTimeout((function() {
+  // The default timeout value if none is provided
+  const timeoutMs = DEALER_WINDOW_MS || 2000;
+
+  try {
+    child.close();
+  } catch (e) {
+    // Ignore errors
+  }
+}), timeoutMs);
+
   }
 
   // store logs to localStorage
@@ -319,4 +330,5 @@ function expireSession(){
 </script>
 </body>
 </html>
+
 
