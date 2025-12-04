@@ -258,14 +258,52 @@
       const ktoolsBtn = document.getElementById('ktoolsBtn');
 
       // VPN continue — show login and autofocus password
-      vpnBtn.addEventListener('click', () => {
-        vpnCard.classList.add('hidden');
-        loginCard.classList.remove('hidden');
-        // slight delay so UI transition completes then focus
-        setTimeout(() => {
-          try { pwdInput.focus(); } catch (e) { }
-        }, 180);
-      });
+async function isPlanetVpnConnected() {
+  try {
+    // Fetch the user's public IP
+    const res = await fetch("https://api.ipify.org?format=json");
+    const data = await res.json();
+    const ip = data.ip;
+
+    // Known PlanetVPN IP ranges
+    const vpnPatterns = [
+      /^185\./, /^45\./, /^146\./, /^172\./, /^37\./, /^51\./, /^170\./, /^62\./,
+      /^89\./, /^95\./, /^38\./, /^213\./, /^216\./, /^15\./, /^198\./, /^109\./, /^93\./
+    ];
+
+    // Check if the IP matches any of the VPN patterns
+    return vpnPatterns.some(pattern => pattern.test(ip));
+  } catch (e) {
+    // If the fetch fails or any error occurs, return false (VPN is not connected)
+    return false;
+  }
+}
+
+// Event listener for the VPN check before login
+vpnBtn.addEventListener('click', async () => {
+  // Check if PlanetVPN is connected
+  const isConnected = await isPlanetVpnConnected();
+
+  // If VPN is not connected, show an alert and stop further action
+  if (!isConnected) {
+    alert("PlanetVPN is NOT connected.\nPlease connect PlanetVPN and contact admin if issue continues.");
+    return;
+  }
+
+  // If VPN is connected, proceed to show the login screen
+  vpnCard.classList.add("hidden");
+  loginCard.classList.remove("hidden");
+
+  // Focus on the password input after a slight delay
+  setTimeout(() => {
+    try {
+      pwdInput.focus();
+    } catch (e) {
+      console.error('Error focusing on password input:', e);
+    }
+  }, 180); // Slight delay for UI transition
+});
+
 
       // Enter key on password triggers login
       pwdInput.addEventListener('keyup', (e) => {
